@@ -26,7 +26,11 @@
               src="./assets/images/image-waffle-mobile.jpg"
               alt="Vanilla Bean Crème Brûlée"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Vanilla Bean Crème Brûlée"
+              data-price="7.00"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -45,7 +49,11 @@
               src="./assets/images/image-macaron-mobile.jpg"
               alt="Macaron Mix of Five"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Mix of Five Macaron"
+              data-price="8.00"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -64,7 +72,11 @@
               src="./assets/images/image-tiramisu-mobile.jpg"
               alt="Classic Tiramisu"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Classic Tiramisu"
+              data-price="5.50"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -83,7 +95,11 @@
               src="./assets/images/image-baklava-mobile.jpg"
               alt="Pistachio Baklava"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Pistachio Baklava"
+              data-price="4.00"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -99,10 +115,14 @@
         <article class="product">
           <div class="product-image">
             <img
-              src="./assets/images/image-meringue-mobile.jpg"
+              src="./assets/images/image-pie-mobile.jpg"
               alt="Lemon Meringue Pie"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Lemon Meringue Pie"
+              data-price="5.00"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -118,10 +138,37 @@
         <article class="product">
           <div class="product-image">
             <img
-              src="./assets/images/image-cake-mobile.jpg"
+              src="./assets/images/image-red-velvet-cake-mobile.jpg"
               alt="Red Velvet Cake"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Red Velvet Cake"
+              data-price="4.50"
+            >
+              <img
+                src="./assets/images/icon-add-to-cart.svg"
+                alt="Add to Cart"
+              />
+              <p>Add to Cart</p>
+            </button>
+          </div>
+          <p class="category">Cake</p>
+          <h2 class="title">Red Velvet Cake</h2>
+          <p class="price">$4.50</p>
+        </article>
+
+        <article class="product">
+          <div class="product-image">
+            <img
+              src="./assets/images/image-red-velvet-cake-mobile.jpg"
+              alt="Red Velvet Cake"
+            />
+            <button
+              class="btn-add-cart"
+              data-name="Red Velvet Cake"
+              data-price="4.50"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -140,7 +187,11 @@
               src="./assets/images/image-brownie-mobile.jpg"
               alt="Salted Caramel Brownie"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Salted Caramel Brownie"
+              data-price="4.50"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -159,7 +210,11 @@
               src="./assets/images/image-panna-cotta-mobile.jpg"
               alt="Vanilla Panna Cotta"
             />
-            <button class="btn-add-cart">
+            <button
+              class="btn-add-cart"
+              data-name="Vanilla Panna Cotta"
+              data-price="6.50"
+            >
               <img
                 src="./assets/images/icon-add-to-cart.svg"
                 alt="Add to Cart"
@@ -183,6 +238,7 @@
         />
         <p>Your added items will appear here</p>
       </div>
+      <div class="cart-list"></div>
     </section>
 
     <div class="attribution">
@@ -190,5 +246,6 @@
       <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
       Coded by <a href="#">Colin</a>.
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
