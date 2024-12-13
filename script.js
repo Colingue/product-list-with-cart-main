@@ -2,9 +2,82 @@ let cart = [];
 
 const buttons = document.querySelectorAll(".btn-add-cart");
 
+const decrementButtons = document.querySelectorAll(".decrement");
+const incrementButtons = document.querySelectorAll(".increment");
+
 function removeFromCart(name) {
   cart = cart.filter((product) => product.name !== name);
   updateCart();
+}
+
+function updateQuantityOnButton(name) {
+  const pQuantity = document.querySelector(
+    `.btn-change-quantity[data-name="${name}"] .quantity`
+  );
+
+  console.log(pQuantity);
+
+  pQuantity.innerHTML = cart.find((p) => p.name == name).quantity;
+}
+
+function toggleVisibilityButtons(name) {
+  const buttonAdd = document.querySelector(
+    `.btn-add-cart[data-name="${name}"]`
+  );
+
+  const divChangeQuantity = document.querySelector(
+    `.btn-change-quantity[data-name="${name}"]`
+  );
+
+  const imgProduct = buttonAdd.previousElementSibling;
+
+  divChangeQuantity.classList.toggle("hidden");
+  buttonAdd.classList.toggle("hidden");
+  imgProduct.classList.toggle("border-orange");
+
+  updateQuantityOnButton(name);
+}
+
+function clickOnDecrement(name) {
+  const product = cart.find((p) => p.name == name);
+
+  if (product) {
+    if (product.quantity == 1) {
+      removeFromCart(name);
+
+      toggleVisibilityButtons(name);
+    } else {
+      product.quantity--;
+      updateQuantityOnButton(name);
+    }
+    updateCart();
+  }
+}
+
+function clickOnIncrement(name) {
+  const product = cart.find((p) => p.name == name);
+
+  if (product) {
+    product.quantity++;
+  }
+  updateQuantityOnButton(name);
+  updateCart();
+}
+
+function clickOnAddToCart(btn) {
+  const name = btn.getAttribute("data-name");
+  const price = btn.getAttribute("data-price");
+
+  const existingProduct = cart.find((product) => product.name == name);
+
+  if (existingProduct) {
+    existingProduct.quantity++;
+  } else {
+    cart.push({ name, price, quantity: 1 });
+  }
+
+  updateCart();
+  toggleVisibilityButtons(name);
 }
 
 function updateCart() {
@@ -53,6 +126,7 @@ function updateCart() {
       button.addEventListener("click", () => {
         const name = button.getAttribute("data-name");
         removeFromCart(name);
+        toggleVisibilityButtons(name);
       });
     });
   } else {
@@ -65,19 +139,21 @@ function updateCart() {
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    const name = button.getAttribute("data-name");
-    const price = button.getAttribute("data-price");
+    clickOnAddToCart(button);
+  });
+});
 
-    const existingProduct = cart.find((product) => product.name == name);
+decrementButtons.forEach((dButton) => {
+  dButton.addEventListener("click", () => {
+    const name = dButton.getAttribute("data-name");
+    clickOnDecrement(name);
+  });
+});
 
-    if (existingProduct) {
-      existingProduct.quantity++;
-    } else {
-      cart.push({ name, price, quantity: 1 });
-    }
-
-    updateCart();
-    console.log(cart);
+incrementButtons.forEach((iButton) => {
+  iButton.addEventListener("click", () => {
+    const name = iButton.getAttribute("data-name");
+    clickOnIncrement(name);
   });
 });
 
