@@ -42,6 +42,7 @@ h2 {
   display: grid;
   gap: 30px;
   margin-bottom: 20px;
+  grid-template-columns: 1fr; /* Une seule colonne */
 }
 
 .product .title {
@@ -182,7 +183,6 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .cart-total .title {
@@ -196,7 +196,7 @@ h2 {
   font-weight: 700;
 }
 
-.confirm-order {
+.main-btn {
   background-color: hsl(14, 86%, 42%);
   color: white;
   width: 100%;
@@ -205,6 +205,7 @@ h2 {
   border-radius: 50px;
   font-size: 1rem;
   font-weight: 400;
+  margin: 30px 0;
 }
 
 .divider {
@@ -230,9 +231,92 @@ h2 {
   padding: 18px;
   border-radius: 5px;
   background-color: hsl(20, 50%, 98%);
-  margin-bottom: 20px;
+  margin: 30px 0px 0px 0;
 }
 
 .border-orange {
   border: 3px solid hsl(14, 86%, 42%);
+}
+
+.overlay-background {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.425);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.modal {
+  width: 100vw;
+  height: 80vh;
+  background-color: white;
+  border-radius: 20px 20px 0px 0px;
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  overflow: scroll;
+}
+
+.modal-content {
+  padding: 40px 30px 10px 30px;
+}
+
+.modal-content > .title {
+  margin-top: 20px;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.modal-content .description {
+  color: hsl(12, 20%, 44%);
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.modal-content .list {
+  background-color: hsl(20, 50%, 98%);
+  border-radius: 20px;
+  padding: 30px;
+}
+
+@media (min-width: 769px) {
+  .product-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .container {
+    display: flex;
+    align-items: baseline;
+    gap: 40px;
+    max-width: 1400px;
+    margin: auto;
+  }
+
+  body {
+    padding: 40px;
+  }
+
+  .cart {
+    width: 40%;
+  }
+
+  .modal {
+    width: 600px;
+    height: fit-content;
+    background-color: white;
+    border-radius: 20px;
+    position: fixed;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: auto;
+  }
+}
+
+.empty-cart .description {
+  white-space: nowrap;
 }

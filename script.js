@@ -5,6 +5,8 @@ const buttons = document.querySelectorAll(".btn-add-cart");
 const decrementButtons = document.querySelectorAll(".decrement");
 const incrementButtons = document.querySelectorAll(".increment");
 
+const resetOrderButton = document.querySelector(".reset-order");
+
 function removeFromCart(name) {
   cart = cart.filter((product) => product.name !== name);
   updateCart();
@@ -18,6 +20,14 @@ function updateQuantityOnButton(name) {
   console.log(pQuantity);
 
   pQuantity.innerHTML = cart.find((p) => p.name == name).quantity;
+}
+
+function toggleModal() {
+  const modalOverlay = document.getElementsByClassName("overlay-background")[0];
+  const modal = document.getElementsByClassName("modal")[0];
+
+  modalOverlay.classList.toggle("hidden");
+  modal.classList.toggle("hidden");
 }
 
 function toggleVisibilityButtons(name) {
@@ -36,6 +46,22 @@ function toggleVisibilityButtons(name) {
   imgProduct.classList.toggle("border-orange");
 
   updateQuantityOnButton(name);
+}
+
+function resetAll() {
+  cart = [];
+  updateCart();
+  const btnAddToCart = document.querySelectorAll(".btn-add-cart");
+  btnAddToCart.forEach((btn) => {
+    btn.classList.remove("hidden");
+    const imgProduct = btn.previousElementSibling;
+    imgProduct.classList.remove("border-orange");
+  });
+
+  const btnChangeQuantity = document.querySelectorAll(".btn-change-quantity");
+  btnChangeQuantity.forEach((btn) => {
+    btn.classList.add("hidden");
+  });
 }
 
 function clickOnDecrement(name) {
@@ -117,11 +143,37 @@ function updateCart() {
           <img src="./assets/images/icon-carbon-neutral.svg" />
           <p>This is <b>carbon-neutral</b> delivery</p>
         </div>` +
-      `<button class="confirm-order">Confirm Order</button>`;
+      `<button class="confirm-order main-btn">Confirm Order</button>`;
+
+    const confirmOrderButton = document.querySelector(".confirm-order");
+
+    confirmOrderButton.addEventListener("click", () => {
+      toggleModal();
+      const listContainer = document.querySelector(".modal .list");
+
+      listContainer.innerHTML =
+        cart
+          .map(
+            (p) => ` 
+      <div class="cart-product">
+        <div>
+          <p class="title">${p.name}</p>
+          <div class="properties">
+            <p class="quantity">${p.quantity}x</p>
+            <p class="solo-price">@ $${p.price} </p>
+            <p class="total-price">$${(p.quantity * p.price).toFixed(2)}</p>
+          </div>
+        </div>
+      </div>`
+          )
+          .join("<div class='divider'></div>") +
+        "<div class='divider'></div>" +
+        `<div class='cart-total'><p class='title'>Order total</p><p class='price'>$${sum}</p></div>
+        `;
+    });
 
     const deleteButtons = document.querySelectorAll(".delete-item");
-    const confirmOrderButton = document.querySelector(".confirm-order");
-    confirmOrderButton.addEventListener("click", () => {});
+
     deleteButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const name = button.getAttribute("data-name");
@@ -155,6 +207,11 @@ incrementButtons.forEach((iButton) => {
     const name = iButton.getAttribute("data-name");
     clickOnIncrement(name);
   });
+});
+
+resetOrderButton.addEventListener("click", () => {
+  resetAll();
+  toggleModal();
 });
 
 updateCart();
