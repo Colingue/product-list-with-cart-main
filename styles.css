@@ -320,3 +320,7 @@ h2 {
 .empty-cart .description {
   white-space: nowrap;
 }
+
+button {
+  cursor: pointer;
+}
